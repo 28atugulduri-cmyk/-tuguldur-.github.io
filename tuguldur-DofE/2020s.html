@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore modern basketball sneaker technology and culture in the 2020s.">
+<title>2020s: Tech-Heavy & Culture | History of Hoop Shoes</title>
+
+<style>
+    .screen-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff6f00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 9999;
+    font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+    .screen-warning {
+        display: block !important;
+    }
+
+    .big-div {
+        grid-template-columns: 1fr;
+    }
+}
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #f2f2f2;
+    color: #1e2a38;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    opacity: 0;
+    transition: opacity .6s ease;
+    overflow-x: hidden;
+}
+body.loaded { opacity: 1; }
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1e2a38;
+    border-bottom: 1px solid #ddd;
+}
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    display: block;
+    padding: 14px 16px;
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background-color .25s ease;
+}
+nav a:hover, nav a.active { background: #e96c2c; }
+
+.hero {
+    text-align: center;
+    padding: 35px 20px 0;
+}
+.eyebrow {
+    color: #e96c2c;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.hero h1 {
+    margin: 10px 0;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.1;
+}
+.hero p {
+    color: #555;
+    font-size: 17px;
+    margin: 12px auto;
+    max-width: 620px;
+    line-height: 1.6;
+}
+
+.carousel {
+    width: 100%;
+    max-width: 1050px;
+    margin: 10px auto 0;
+    padding: 10px 20px 25px;
+}
+.carousel-stage {
+    position: relative;
+    width: 100%;
+    height: 530px;
+    perspective: 1200px;
+    isolation: isolate;
+}
+.sneaker-card {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: min(76%, 540px);
+    height: 485px;
+    padding: 22px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 12px 35px rgba(0,0,0,.16);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(.75);
+    transition:
+        transform .55s cubic-bezier(.22,1,.36,1),
+        opacity .4s ease,
+        box-shadow .4s ease;
+}
+.sneaker-card[data-position="0"] {
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) scale(1);
+}
+.sneaker-card[data-position="1"] {
+    z-index: 3;
+    opacity: .75;
+    transform: translateX(20%) translateY(12px) scale(.84);
+}
+.sneaker-card[data-position="2"] {
+    z-index: 3;
+    opacity: .75;
+    transform: translateX(-120%) translateY(12px) scale(.84);
+}
+.sneaker-card img {
+    width: 100%;
+    height: 255px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+.sneaker-card .year {
+    color: #e96c2c;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.sneaker-card h2 {
+    font-size: clamp(21px, 3vw, 28px);
+    margin: 7px 0;
+}
+.sneaker-card .subtitle {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 10px;
+}
+.sneaker-card .description {
+    max-width: 430px;
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 5px;
+}
+.arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #1e2a38;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease;
+}
+.arrow:hover {
+    background: #e96c2c;
+    transform: scale(1.1);
+}
+.arrow:focus-visible {
+    outline: 3px solid #e96c2c;
+    outline-offset: 4px;
+}
+.counter {
+    min-width: 65px;
+    text-align: center;
+    color: #555;
+    font-weight: 700;
+    font-size: 14px;
+}
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 18px;
+}
+.dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #b8bdc4;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+.dot.active {
+    background: #e96c2c;
+    transform: scale(1.35);
+}
+
+footer {
+    margin-top: 10px;
+    padding: 22px;
+    text-align: center;
+    background: #1e2a38;
+    color: white;
+    font-size: 13px;
+}
+
+@media (max-width: 650px) {
+    nav a { padding: 11px 10px; font-size: 12px; }
+    .hero { padding-top: 28px; }
+    .hero p { font-size: 14px; }
+    .carousel { padding: 10px 8px 20px; }
+    .carousel-stage { height: 500px; }
+    .sneaker-card { width: 88%; height: 455px; padding: 17px; }
+    .sneaker-card img { height: 220px; }
+    .sneaker-card .description { font-size: 13px; }
+    .sneaker-card[data-position="1"] {
+        transform: translateX(-20%) translateY(12px) scale(.82);
+    }
+    .sneaker-card[data-position="2"] {
+        transform: translateX(-80%) translateY(12px) scale(.82);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+    <div class="screen-warning">
+    For best experience, please use fullscreen.
+</div>
+<nav aria-label="Main navigation">
+    <ul>
+        <li><a href="history of hoop shoes.html">Home</a></li>
+        <li><a href="70s.htm">70s</a></li>
+        <li><a href="80s.htm">80s</a></li>
+        <li><a href="90s.htm">90s</a></li>
+        <li><a href="2000s.html">2000s</a></li>
+        <li><a href="2010s.html">2010s</a></li>
+        <li><a class="active" href="2020s.html" aria-current="page">2020s</a></li>
+    </ul>
+</nav>
+
+<header class="hero">
+    <div class="eyebrow">The Evolution of Hoop Shoes</div>
+    <h1>The 2020s</h1>
+    <p>
+        Specialized performance technology, new cushioning foams,
+        signature designs and sneaker culture continue to shape
+        the modern game.
+    </p>
+</header>
+
+<main>
+    <section class="carousel" aria-label="2020s basketball sneakers">
+        <div class="carousel-stage" id="carouselStage"></div>
+
+        <div class="controls">
+            <button class="arrow" id="prevBtn" aria-label="Previous sneaker">&#8592;</button>
+            <div class="counter" id="counter" aria-live="polite">01 / 03</div>
+            <button class="arrow" id="nextBtn" aria-label="Next sneaker">&#8594;</button>
+        </div>
+
+        <div class="dots" id="dots" aria-label="Choose a sneaker"></div>
+    </section>
+</main>
+
+<footer>History of Hoop Shoes | A DofE Web Development Project</footer>
+
+<script>
+const sneakers = [
+    {
+        year: "2022",
+        title: "Nike LeBron 20",
+        subtitle: "A new direction for a signature line",
+        description:
+            "The LeBron 20 marked a major change for LeBron's " +
+            "signature series with a lightweight low-top silhouette. " +
+            "Its forefoot and heel Zoom Air units, carbon-fiber " +
+            "midfoot shank and refined design targeted modern play.",
+        image: "nl20.jpg",
+        alt: "Nike LeBron 20 basketball sneaker"
+    },
+    {
+        year: "2024",
+        title: "Nike G.T. Cut 3",
+        subtitle: "ZoomX foam reaches basketball",
+        description:
+            "The G.T. Cut 3 introduced Nike ZoomX foam to a Nike " +
+            "Basketball shoe. Its lightweight upper and traction " +
+            "pattern were designed for players looking to create " +
+            "separation through sharp cuts and quick movement.",
+        image: "gtcut.jpg",
+        alt: "Nike G.T. Cut 3 basketball sneaker"
+    },
+    {
+        year: "2024",
+        title: "adidas Harden Vol. 8",
+        subtitle: "Performance meets bold design",
+        description:
+            "James Harden's eighth signature shoe paired a distinctive, " +
+            "layered appearance with a performance-focused build. " +
+            "Its cushioning setup and supportive construction reflected " +
+            "the modern push to combine court function with standout style.",
+        image: "ahv8.jpg",
+        alt: "adidas Harden Vol. 8 basketball sneaker"
+    }
+];
+
+const stage = document.getElementById("carouselStage");
+const counter = document.getElementById("counter");
+const dotsContainer = document.getElementById("dots");
+let activeIndex = 0;
+
+sneakers.forEach((sneaker, index) => {
+    const card = document.createElement("article");
+    card.className = "sneaker-card";
+    card.dataset.index = index;
+
+    const img = document.createElement("img");
+    img.src = sneaker.image;
+    img.alt = sneaker.alt;
+
+    const year = document.createElement("div");
+    year.className = "year";
+    year.textContent = sneaker.year;
+
+    const title = document.createElement("h2");
+    title.textContent = sneaker.title;
+
+    const subtitle = document.createElement("p");
+    subtitle.className = "subtitle";
+    subtitle.textContent = sneaker.subtitle;
+
+    const description = document.createElement("p");
+    description.className = "description";
+    description.textContent = sneaker.description;
+
+    card.append(img, year, title, subtitle, description);
+    stage.appendChild(card);
+
+    const dot = document.createElement("button");
+    dot.className = "dot";
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show ${sneaker.title}`);
+    dot.addEventListener("click", () => {
+        activeIndex = index;
+        updateCarousel();
+    });
+    dotsContainer.appendChild(dot);
+});
+
+function updateCarousel() {
+    const cards = document.querySelectorAll(".sneaker-card");
+    const dots = document.querySelectorAll(".dot");
+
+    cards.forEach((card, index) => {
+        const position =
+            (index - activeIndex + sneakers.length) % sneakers.length;
+
+        card.dataset.position = position;
+        card.setAttribute("aria-hidden", position === 0 ? "false" : "true");
+        card.inert = position !== 0;
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === activeIndex);
+        dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+    });
+
+    counter.textContent =
+        `${String(activeIndex + 1).padStart(2, "0")} / ` +
+        `${String(sneakers.length).padStart(2, "0")}`;
+}
+
+function nextSneaker() {
+    activeIndex = (activeIndex + 1) % sneakers.length;
+    updateCarousel();
+}
+
+function previousSneaker() {
+    activeIndex = (activeIndex - 1 + sneakers.length) % sneakers.length;
+    updateCarousel();
+}
+
+document.getElementById("nextBtn").addEventListener("click", nextSneaker);
+document.getElementById("prevBtn").addEventListener("click", previousSneaker);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "ArrowRight") nextSneaker();
+    if (event.key === "ArrowLeft") previousSneaker();
+});
+
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
+
+updateCarousel();
+</script>
+</body>
+</html>
