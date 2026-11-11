@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>80s - Basketball Sneaker Explosion</title>
+
+<style>
+    .screen-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff6f00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 9999;
+    font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+    .screen-warning {
+        display: block !important;
+    }
+
+    .big-div {
+        grid-template-columns: 1fr;
+    }
+}
+body {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.big-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 15px;
+    text-align: center;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-family: system-ui;
+    font-weight: bold;
+}
+
+.card-description {
+    font-family: system-ui;
+    color: #555;
+}
+
+body {
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1e2a38;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+ul li {
+    float: left;
+}
+
+ul li a {
+    font-family: system-ui;
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    background-color: #e96c2c;
+}
+
+.active {
+    background-color: #c45722;
+}
+</style>
+</head>
+
+<script>
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
+</script>
+
+<body>
+<div class="screen-warning">
+    For best experience, please use fullscreen.
+</div>
+<ul>
+    <li><a href="history of hoop shoes.html">Home</a></li>
+    <li><a href="70s.htm">70s</a></li>
+    <li><a class="active" href="80s.htm">80s</a></li>
+    <li><a href="90s.htm">90s</a></li>
+    <li><a href="2000s.html">2000s</a></li>
+    <li><a href="2010s.html">2010s</a></li>
+            <li><a href="2020s.html">2020s</a></li>
+</ul>
+
+<h1 style="padding-top: 70px; text-align:center; font-size:55px; font-family:system-ui;">
+    1980s - Sneaker Revolution
+</h1>
+
+<div class="big-div">
+
+<div class="card">
+    <div class="image-placeholder"></div>
+
+    <h3 class="card-title">Air Jordan Begins</h3>
+
+    <p class="card-description">
+        Nike changed basketball forever with the first Air Jordan released for Michael Jordan in 1985.
+    </p>
+</div>
+
+<div class="card">
+    <div class="image-placeholder"></div>
+
+    <h3 class="card-title">Bright Colors</h3>
+
+    <p class="card-description">
+        Sneakers became more colorful and bold as brands competed for attention.
+    </p>
+</div>
+
+<div class="card">
+    <div class="image-placeholder"></div>
+
+    <h3 class="card-title">Basketball Meets Fashion</h3>
+
+    <p class="card-description">
+        Basketball shoes became part of music, streetwear, and pop culture worldwide.
+    </p>
+</div>
+
+</div>
+<p class="card-description">
+The 1980s completely changed basketball sneaker culture. Nike exploded into popularity with the Air Jordan line made for Michael Jordan, turning basketball shoes into global icons. Brands competed with louder colors, better cushioning, and more creative advertising. Sneakers became connected to music, fashion, and celebrity culture, not just sports. By the end of the decade, basketball shoes were seen as status symbols around the world.
+</p>
+</body>
+</html>
